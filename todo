@@ -1,0 +1,64 @@
+ADMIN
+login page
+storefront
+inventory page -> product, description, category, price, stock, feature, 
+reports -> today, this month, total revenue, avg order value
+inventory reports
+
+BUYER
+home page
+login page
+registration
+-> smtp
+featured products new, trending, best seller
+all product display
+cart
+my orders -> transaction history
+profile page
+
+
+DATABASE
+
+admins
+id
+email
+password
+
+users
+id
+email
+password
+fullname
+address
+phone_number
+
+categories
+id
+category_name -> gardening, construction, home decor, agriculture
+
+products
+id
+category_id -> foreign to category table
+product_image
+product_name
+product_description
+product_price
+product_stocks
+product_status
+product_feature -> new, trending, best seller
+
+carts
+id
+product_id -> foreign to products table
+user_id -> foreign to users table
+quantity
+
+orders
+id
+order_number
+product_id -> foreign to products table
+user_id-> foreign to users table
+quantity
+price
+
+
