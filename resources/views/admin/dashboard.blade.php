@@ -9,6 +9,30 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
+    <style>
+        .card-link {
+            text-decoration: none;
+        }
+
+        .card-link .stat-card {
+            transition: background-color 0.3s, transform 0.2s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .card-link .stat-card:hover {
+            background-color: #1a3020;
+            color: #fff; 
+            transform: translateY(-5px);
+        }
+
+        .card-link .stat-card:hover .icon-box {
+            background-color: #2a482f;
+        }
+
+        .card-link .stat-card:hover small.text-muted {
+            color: #f3f3f3 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -66,34 +90,40 @@
             </div>
 
             <div class="row g-4 mb-5">
-                <div class="col-md-4">
-                    <div class="card stat-card p-3 d-flex flex-row align-items-center">
-                        <div class="icon-box bg-dark me-3"><i class="bi bi-box"></i></div>
-                        <div>
-                            <h6 class="mb-0 fw-bold">Manage Inventory</h6><small class="text-muted">Add/Edit
-                                products</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card stat-card p-3 d-flex flex-row align-items-center">
-                        <div class="icon-box bg-dark me-3"><i class="bi bi-journal-text"></i></div>
-                        <div>
-                            <h6 class="mb-0 fw-bold">View Reports</h6><small class="text-muted">Sales
-                                analytics</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card stat-card p-3 d-flex flex-row align-items-center">
-                        <div class="icon-box bg-dark me-3"><i class="bi bi-pencil-square"></i></div>
-                        <div>
-                            <h6 class="mb-0 fw-bold">Edit Storefront</h6><small class="text-muted">Update shop
-                                page</small>
-                        </div>
-                    </div>
+    <div class="col-md-4">
+        <a href="{{ route('admin.inventory.page') }}" class="card-link">
+            <div class="card stat-card p-3 d-flex flex-row align-items-center">
+                <div class="icon-box bg-dark me-3"><i class="bi bi-box"></i></div>
+                <div>
+                    <h6 class="mb-0 fw-bold">Manage Inventory</h6>
+                    <small class="text-muted">Add/Edit products</small>
                 </div>
             </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="{{ route('admin.reports.page') }}" class="card-link">
+            <div class="card stat-card p-3 d-flex flex-row align-items-center">
+                <div class="icon-box bg-dark me-3"><i class="bi bi-journal-text"></i></div>
+                <div>
+                    <h6 class="mb-0 fw-bold">View Reports</h6>
+                    <small class="text-muted">Sales analytics</small>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a href="{{ route('admin.storefront.page') }}" class="card-link">
+            <div class="card stat-card p-3 d-flex flex-row align-items-center">
+                <div class="icon-box bg-dark me-3"><i class="bi bi-pencil-square"></i></div>
+                <div>
+                    <h6 class="mb-0 fw-bold">Edit Storefront</h6>
+                    <small class="text-muted">Update shop page</small>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 
             <div class="card stat-card p-4 shadow-sm">
                 <h5 class="fw-bold mb-4">Recent Orders</h5>
