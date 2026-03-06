@@ -177,6 +177,55 @@ body {
     border: none
 }
 
+.shop-section {
+    background: #f7f7f7;
+}
+
+.shop-category {
+    list-style: none;
+    padding: 0;
+}
+
+.shop-category li {
+    padding: 8px 0;
+    cursor: pointer;
+    color: #555;
+}
+
+.shop-category li:hover {
+    color: var(--primary-green);
+    font-weight: 600;
+}
+
+.product-card-shop {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.product-card-shop:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.product-card-shop img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.btn-add-cart-shop {
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 50px;
+}
+
+.btn-add-cart-shop:hover {
+    background: var(--accent-gold);
+    color: black;
+}
+
 /* Hover effect */
 .btn-add-cart:hover {
     background-color: var(--accent-gold);

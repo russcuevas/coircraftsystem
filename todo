@@ -46,7 +46,7 @@ product_price
 product_stocks
 product_status
 product_sales
-product_feature -> new, trending, best seller
+product_feature -> new, trending, best seller, none
 
 carts
 id
@@ -62,6 +62,7 @@ user_id-> foreign to users table
 quantity
 price
 payment_method -> GCASH COD
+payment_proof
 payment_status -> paid, not paid
 delivery_method -> pickup, delivery
 status -> pending, for delivery, completed
