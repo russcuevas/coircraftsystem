@@ -8,11 +8,11 @@
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <style>
         .category-img-wrapper {
             height: 250px;
-            /* Fixed height for all boxes */
             width: 100%;
             overflow: hidden;
             position: relative;
@@ -23,7 +23,6 @@
             height: 100%;
             width: 100%;
             object-fit: cover;
-            /* This crops the image to fill the space without stretching */
             transition: transform 0.5s ease;
         }
 
@@ -143,9 +142,21 @@
                                     <div class="card-body text-center">
                                         <h6 class="fw-bold">{{ $product->product_name }}</h6>
                                         <p class="text-gold mb-2">₱{{ number_format($product->product_price, 2) }}</p>
-                                        <button class="btn btn-outline-dark btn-sm rounded-pill w-100">
-                                            <i class="bi bi-cart-plus me-2"></i> Add to Cart
-                                        </button>
+                                        @auth
+                                            <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-outline-dark btn-sm rounded-pill w-100">
+                                                    <i class="bi bi-cart-plus me-2"></i> Add to Cart
+                                                </button>
+                                            </form>
+                                        @endauth
+
+                                        @guest
+                                            <a href="{{ route('auth.login.page') }}"
+                                                class="btn btn-outline-dark btn-sm rounded-pill w-100">
+                                                <i class="bi bi-lock me-2"></i> Login first
+                                            </a>
+                                        @endguest
                                     </div>
                                 </div>
                             </div>
@@ -168,9 +179,21 @@
                                     <div class="card-body text-center">
                                         <h6 class="fw-bold">{{ $product->product_name }}</h6>
                                         <p class="text-gold mb-2">₱{{ number_format($product->product_price, 2) }}</p>
-                                        <button class="btn btn-outline-dark btn-sm rounded-pill w-100">
-                                            <i class="bi bi-cart-plus me-2"></i> Add to Cart
-                                        </button>
+                                        @auth
+                                            <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-outline-dark btn-sm rounded-pill w-100">
+                                                    <i class="bi bi-cart-plus me-2"></i> Add to Cart
+                                                </button>
+                                            </form>
+                                        @endauth
+
+                                        @guest
+                                            <a href="{{ route('auth.login.page') }}"
+                                                class="btn btn-outline-dark btn-sm rounded-pill w-100">
+                                                <i class="bi bi-lock me-2"></i> Login first
+                                            </a>
+                                        @endguest
                                     </div>
                                 </div>
                             </div>
@@ -195,9 +218,21 @@
                                     <div class="card-body text-center">
                                         <h6 class="fw-bold">{{ $product->product_name }}</h6>
                                         <p class="text-gold mb-2">₱{{ number_format($product->product_price, 2) }}</p>
-                                        <button class="btn btn-outline-dark btn-sm rounded-pill w-100">
-                                            <i class="bi bi-cart-plus me-2"></i> Add to Cart
-                                        </button>
+                                        @auth
+                                            <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                                @csrf
+                                                <button class="btn btn-outline-dark btn-sm rounded-pill w-100">
+                                                    <i class="bi bi-cart-plus me-2"></i> Add to Cart
+                                                </button>
+                                            </form>
+                                        @endauth
+
+                                        @guest
+                                            <a href="{{ route('auth.login.page') }}"
+                                                class="btn btn-outline-dark btn-sm rounded-pill w-100">
+                                                <i class="bi bi-lock me-2"></i> Login first
+                                            </a>
+                                        @endguest
                                     </div>
                                 </div>
                             </div>
@@ -209,7 +244,7 @@
             </div>
         </div>
         <div class="text-center mt-5">
-            <a href="#" class="btn btn-gold btn-lg px-5">
+            <a href="{{ route('shop.page') }}" class="btn btn-gold btn-lg px-5">
                 View All Products <i class="bi bi-arrow-right ms-2"></i>
             </a>
         </div>
@@ -262,6 +297,45 @@ $defaultImage =
 
     @include('footer')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+    <script>
+        const notyf = new Notyf({
+            duration: 4000,
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            dismissible: true,
+            types: [{
+                    type: 'success',
+                    background: '#198754',
+                    icon: {
+                        className: 'bi bi-check-circle-fill',
+                        tagName: 'i',
+                        color: 'white'
+                    }
+                },
+                {
+                    type: 'error',
+                    background: '#dc3545',
+                    icon: {
+                        className: 'bi bi-exclamation-triangle-fill',
+                        tagName: 'i',
+                        color: 'white'
+                    }
+                }
+            ]
+        });
+
+        @if (session('success'))
+            notyf.success("{{ session('success') }}");
+        @endif
+
+        @if (session('error'))
+            notyf.error("{{ session('error') }}");
+        @endif
+    </script>
 </body>
 
 </html>

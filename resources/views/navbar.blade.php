@@ -23,10 +23,25 @@
                 </ul>
                 <div class="d-flex align-items-center gap-3">
 
-                    <!-- Cart -->
-                    <a href="#" class="text-dark">
+                    <a href="/cart" class="text-dark position-relative">
                         <i class="bi bi-cart3 fs-5"></i>
+                        <span id="cart-count-badge"
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            0
+                        </span>
                     </a>
+
+                    <script>
+                        function updateCartCount() {
+                            fetch('/cart-count')
+                                .then(res => res.json())
+                                .then(data => {
+                                    document.getElementById('cart-count-badge').textContent = data.cartCount;
+                                });
+                        }
+
+                        updateCartCount();
+                    </script>
 
                     <!-- Profile Dropdown -->
                     <div class="dropdown">
@@ -36,8 +51,45 @@
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                            <li><a class="dropdown-item" href="/login">Login</a></li>
-                            <li><a class="dropdown-item" href="/register">Register</a></li>
+
+                            @auth
+                                <li>
+                                    <a class="dropdown-item" href="">
+                                        <i class="bi bi-person me-2"></i> My Profile
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" href="">
+                                        <i class="bi bi-receipt me-2"></i> My Transaction
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <form action="{{ route('auth.logout') }}" method="POST">
+                                        @csrf
+                                        <button class="dropdown-item text-danger">
+                                            <i class="bi bi-box-arrow-right me-2"></i> Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            @endauth
+
+
+                            @guest
+                                <li>
+                                    <a class="dropdown-item" href="/login">
+                                        <i class="bi bi-box-arrow-in-right me-2"></i> Login
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" href="/register">
+                                        <i class="bi bi-person-plus me-2"></i> Register
+                                    </a>
+                                </li>
+                            @endguest
+
                         </ul>
                     </div>
 

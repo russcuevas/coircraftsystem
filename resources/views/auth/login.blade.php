@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <style>
         .login-container {
@@ -65,45 +66,41 @@
                         <p class="text-muted">Enter your credentials to access your account</p>
                     </div>
 
-                    <form action="/login" method="POST">
+                    <form action="{{ route('auth.login.request') }}" method="POST">
+                        @csrf
+
                         <div class="mb-4">
                             <label class="form-label fw-semibold">Email Address</label>
+
                             <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0"><i
-                                        class="bi bi-envelope text-muted"></i></span>
-                                <input type="email" class="form-control bg-light border-start-0"
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-envelope text-muted"></i>
+                                </span>
+
+                                <input type="email" name="email" class="form-control bg-light border-start-0"
                                     placeholder="name@example.com" required>
+
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Password</label>
+
                             <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0"><i
-                                        class="bi bi-lock text-muted"></i></span>
-                                <input type="password" class="form-control bg-light border-start-0"
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-lock text-muted"></i>
+                                </span>
+
+                                <input type="password" name="password" class="form-control bg-light border-start-0"
                                     placeholder="••••••••" required>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <div class="form-check">
 
                             </div>
-                            <a href="#" class="small text-decoration-none fw-bold"
-                                style="color: var(--primary-green);">Forgot password?</a>
                         </div>
 
                         <button type="submit" class="btn btn-gold w-100 py-3 mb-4">
                             Sign In <i class="bi bi-box-arrow-in-right ms-2"></i>
                         </button>
 
-
-                        <p class="text-center text-muted mb-0">
-                            Don't have an account?
-                            <a href="/register" class="fw-bold text-decoration-none"
-                                style="color: var(--primary-green);">Create Account</a>
-                        </p>
                     </form>
                 </div>
             </div>
@@ -111,6 +108,45 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+    <script>
+        const notyf = new Notyf({
+            duration: 4000,
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            dismissible: true,
+            types: [{
+                    type: 'success',
+                    background: '#198754',
+                    icon: {
+                        className: 'bi bi-check-circle-fill',
+                        tagName: 'i',
+                        color: 'white'
+                    }
+                },
+                {
+                    type: 'error',
+                    background: '#dc3545',
+                    icon: {
+                        className: 'bi bi-exclamation-triangle-fill',
+                        tagName: 'i',
+                        color: 'white'
+                    }
+                }
+            ]
+        });
+
+        @if (session('success'))
+            notyf.success("{{ session('success') }}");
+        @endif
+
+        @if (session('error'))
+            notyf.error("{{ session('error') }}");
+        @endif
+    </script>
 </body>
 
 </html>

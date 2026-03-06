@@ -6,6 +6,9 @@ use App\Http\Controllers\admin\OrdersController;
 use App\Http\Controllers\admin\ReportsController;
 use App\Http\Controllers\admin\StorefrontController;
 use App\Http\Controllers\auth\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartCountsController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
@@ -23,10 +26,25 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'HomePage'])->name('home.page');
-
 Route::get('/shop', [ShopController::class, 'ShopPage'])->name('shop.page');
+Route::get('/shop-search', [ShopController::class, 'ProductSearch']);
+
+Route::middleware('auth')->group(function () {
+    Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+    Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/remove/{cartItem}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::get('/cart-count', [CartCountsController::class, 'count'])->name('cart.count');
+
+    Route::get('/checkout', [CheckoutController::class, 'CheckoutPage'])->name('checkout.page');
+    Route::post('/checkout/place', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
+});
+
 
 Route::get('/login', [AuthController::class, 'LoginPage'])->name('auth.login.page');
+Route::post('/login/request', [AuthController::class, 'LoginRequest'])->name('auth.login.request');
+Route::post('/logout', [AuthController::class, 'Logout'])->name('auth.logout');
+
 Route::get('/register', [AuthController::class, 'RegisterPage'])->name('auth.regsiter.page');
 
 
