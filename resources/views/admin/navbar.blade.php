@@ -41,7 +41,21 @@
                 <i class="bi bi-bar-chart me-3"></i> Reports
             </a>
         </nav>
+
+            <div class="offcanvas-body">
+    <nav class="nav flex-column">
+        <!-- other links -->
+        <form action="{{ route('auth.admin.logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="nav-link small text-danger btn btn-link p-0 text-start">
+                <i class="bi bi-box-arrow-right me-2"></i> Logout
+            </button>
+        </form>
+    </nav>
+</div>
     </div>
+
+
 </div>
 
 
@@ -82,8 +96,11 @@
     </nav>
 
     <div class="position-absolute bottom-0 start-0 p-4 w-100">
-        <a class="nav-link small text-danger" href="/logout">
-            <i class="bi bi-box-arrow-right me-2"></i> Logout
-        </a>
+        <form action="{{ route('auth.admin.logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="nav-link small text-danger btn btn-link p-0 text-start w-100">
+                <i class="bi bi-box-arrow-right me-2"></i> Logout
+            </button>
+        </form>
     </div>
 </aside>

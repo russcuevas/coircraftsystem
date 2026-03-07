@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
     <style>
         .card-link {
@@ -234,6 +235,47 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+    <script>
+        // 1. Initialize Notyf with a clean, modern look
+        const notyf = new Notyf({
+            duration: 4000,
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            dismissible: true,
+            types: [{
+                    type: 'success',
+                    background: '#198754', // Bootstrap Success Green
+                    icon: {
+                        className: 'bi bi-check-circle-fill',
+                        tagName: 'i',
+                        color: 'white'
+                    }
+                },
+                {
+                    type: 'error',
+                    background: '#dc3545', // Bootstrap Danger Red
+                    icon: {
+                        className: 'bi bi-exclamation-triangle-fill',
+                        tagName: 'i',
+                        color: 'white'
+                    }
+                }
+            ]
+        });
+
+        // 2. Fire alerts based on Laravel Session data
+        @if (session('success'))
+            notyf.success("{{ session('success') }}");
+        @endif
+
+        @if (session('error'))
+            notyf.error("{{ session('error') }}");
+        @endif
+    </script>
 </body>
 
 </html>

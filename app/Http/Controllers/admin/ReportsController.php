@@ -14,25 +14,25 @@ class ReportsController extends Controller
         $today = Carbon::today();
         $startOfMonth = Carbon::now()->startOfMonth();
 
-        // Today's Sales
+        // Today's Sales (sum price only, ignore quantity)
         $todaySales = DB::table('orders')
             ->whereDate('created_at', $today)
             ->where('payment_status', 'paid')
             ->where('status', 'Completed')
-            ->sum(DB::raw('price * quantity'));
+            ->sum('price');
 
-        // Monthly Sales
+        // Monthly Sales (sum price only, ignore quantity)
         $monthlySales = DB::table('orders')
             ->whereDate('created_at', '>=', $startOfMonth)
             ->where('payment_status', 'paid')
             ->where('status', 'Completed')
-            ->sum(DB::raw('price * quantity'));
+            ->sum('price');
 
-        // Weekly sales (for chart)
+        // Weekly sales (for chart) - sum price only
         $weeklySales = DB::table('orders')
             ->select(
                 DB::raw('WEEK(created_at) as week'),
-                DB::raw('SUM(price * quantity) as total')
+                DB::raw('SUM(price) as total') // sum price only
             )
             ->whereMonth('created_at', Carbon::now()->month)
             ->where('payment_status', 'paid')

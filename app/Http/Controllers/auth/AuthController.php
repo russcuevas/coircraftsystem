@@ -16,6 +16,31 @@ class AuthController extends Controller
     {
         return view('auth.admin_login');
     }
+    
+public function AdminLoginRequest(Request $request)
+{
+    $credentials = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required'
+    ]);
+
+    if (Auth::guard('admin')->attempt($credentials)) {
+        $request->session()->regenerate();
+
+        return redirect()->route('admin.dashboard.page')
+            ->with('success', 'Welcome back Admin!');
+    }
+
+    return back()->withErrors([
+        'email' => 'Invalid email or password.'
+    ])->withInput();
+}
+
+public function AdminLogout()
+{
+            Auth::logout();
+        return redirect('/admin/login')->with('success', 'Logout successful');
+}
 
     public function LoginPage()
     {

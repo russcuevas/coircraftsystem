@@ -56,23 +56,36 @@ Route::get('/register', [AuthController::class, 'RegisterPage'])->name('auth.reg
 Route::post('/register/request', [AuthController::class, 'RegisterRequest'])->name('auth.register.request');
 Route::get('/verify-email/{code}', [AuthController::class, 'VerifyEmail'])->name('auth.verify.email');
 // ADMIN
-Route::get('/admin/login', [AuthController::class, 'AdminLoginPage'])->name('auth.admin.login.page');
+Route::get('/admin/login', [AuthController::class, 'AdminLoginPage'])
+->name('auth.admin.login.page');
 
-Route::get('/admin/dashboard', [DashboardController::class, 'DashboardPage'])->name('admin.dashboard.page');
-Route::get('/admin/storefront', [StorefrontController::class, 'StorefrontPage'])->name('admin.storefront.page');
-Route::post('admin/storefront/update-features', [StorefrontController::class, 'UpdateProductFeatures'])->name('admin.storefront.update_features');
-Route::delete('/admin/storefront/delete-product/{id}', [StorefrontController::class, 'DeleteProductFeature'])->name('admin.storefront.delete_product');
+Route::post('/admin/login', [AuthController::class, 'AdminLoginRequest'])
+->name('auth.admin.login');
 
+Route::post('/admin/logout', [AuthController::class, 'AdminLogout'])
+    ->name('auth.admin.logout')
+    ->middleware('admin.auth');
+    
+Route::middleware('admin.auth')->group(function () {
 
-Route::get('/admin/inventory', [InventoryController::class, 'InventoryPage'])->name('admin.inventory.page');
-Route::post('/admin/inventory/add-product', [InventoryController::class, 'AddProduct'])->name('admin.inventory.add.product');
-Route::post('/admin/inventory/update/{id}', [InventoryController::class, 'UpdateProduct'])->name('admin.inventory.update');
-Route::delete('/admin/inventory/delete/{id}', [InventoryController::class, 'DeleteProduct'])->name('admin.inventory.delete');
+    Route::get('/admin/dashboard', [DashboardController::class, 'DashboardPage'])->name('admin.dashboard.page');
 
-Route::get('/admin/reports', [ReportsController::class, 'ReportsPage'])->name('admin.reports.page');
-Route::get('/admin/orders', [OrdersController::class, 'OrdersPage'])->name('admin.orders.page');
-Route::get('/orders', [OrdersController::class, 'OrdersPage'])->name('admin.orders');
-Route::post('/orders/{order}/toggle-payment', [OrdersController::class, 'togglePayment'])->name('admin.orders.togglePayment');
-Route::post('/orders/{order}/update-status', [OrdersController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+    Route::get('/admin/storefront', [StorefrontController::class, 'StorefrontPage'])->name('admin.storefront.page');
+    Route::post('admin/storefront/update-features', [StorefrontController::class, 'UpdateProductFeatures'])->name('admin.storefront.update_features');
+    Route::delete('/admin/storefront/delete-product/{id}', [StorefrontController::class, 'DeleteProductFeature'])->name('admin.storefront.delete_product');
+
+    Route::get('/admin/inventory', [InventoryController::class, 'InventoryPage'])->name('admin.inventory.page');
+    Route::post('/admin/inventory/add-product', [InventoryController::class, 'AddProduct'])->name('admin.inventory.add.product');
+    Route::post('/admin/inventory/update/{id}', [InventoryController::class, 'UpdateProduct'])->name('admin.inventory.update');
+    Route::delete('/admin/inventory/delete/{id}', [InventoryController::class, 'DeleteProduct'])->name('admin.inventory.delete');
+
+    Route::get('/admin/reports', [ReportsController::class, 'ReportsPage'])->name('admin.reports.page');
+
+    Route::get('/admin/orders', [OrdersController::class, 'OrdersPage'])->name('admin.orders.page');
+
+    Route::post('/orders/{order}/toggle-payment', [OrdersController::class, 'togglePayment'])->name('admin.orders.togglePayment');
+    Route::post('/orders/{order}/update-status', [OrdersController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+
+});
 
 

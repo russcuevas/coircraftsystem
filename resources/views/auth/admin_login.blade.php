@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Portal | CoirCraft PH</title>
+    <title>CoirCraft PH</title>
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <style>
         .login-container {
@@ -71,7 +72,7 @@
                         <p class="text-muted">Please sign in to manage your shop.</p>
                     </div>
 
-                    <form action="/admin/login" method="POST">
+<form action="{{ route('auth.admin.login') }}" method="POST">
                         @csrf <div class="mb-4">
                             <label class="form-label fw-semibold small text-uppercase">Admin Username / Email</label>
                             <div class="input-group">
@@ -111,6 +112,32 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+    <script>
+        const notyf = new Notyf({
+            duration: 4000,
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            dismissible: true
+        });
+
+        @if (session('success'))
+            notyf.success("{{ session('success') }}");
+        @endif
+
+        @if (session('error'))
+            notyf.error("{{ session('error') }}");
+        @endif
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                notyf.error("{{ $error }}");
+            @endforeach
+        @endif
+    </script>
 </body>
 
 </html>
