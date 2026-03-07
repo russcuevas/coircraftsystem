@@ -71,3 +71,8 @@ Route::delete('/admin/inventory/delete/{id}', [InventoryController::class, 'Dele
 
 Route::get('/admin/reports', [ReportsController::class, 'ReportsPage'])->name('admin.reports.page');
 Route::get('/admin/orders', [OrdersController::class, 'OrdersPage'])->name('admin.orders.page');
+Route::get('/orders', [OrdersController::class, 'OrdersPage'])->name('admin.orders');
+Route::post('/orders/{order}/toggle-payment', [OrdersController::class, 'togglePayment'])->name('admin.orders.togglePayment');
+Route::post('/orders/{order}/update-status', [OrdersController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+
+

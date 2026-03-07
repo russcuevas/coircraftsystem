@@ -49,32 +49,6 @@ class ProductsTableSeeder extends Seeder
                 'product_feature' => 'new',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
-            ],
-            [
-                'category_id' => 3,
-                'product_image' => 'sample-none.jpg',
-                'product_name' => 'Sample None',
-                'product_description' => 'None',
-                'product_price' => 350,
-                'product_stocks' => 0,
-                'product_status' => "Available",
-                'product_sales' => 5,
-                'product_feature' => 'none',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],
-            [
-                'category_id' => 3,
-                'product_image' => 'sample-none2.jpg',
-                'product_name' => 'Sample None2',
-                'product_description' => 'None2',
-                'product_price' => 150,
-                'product_stocks' => 10,
-                'product_status' => "Available",
-                'product_sales' => 3,
-                'product_feature' => 'none',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
             ]
         ];
 

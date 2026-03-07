@@ -21,23 +21,23 @@
 
     <div class="offcanvas-body">
         <nav class="nav flex-column">
-            <a class="nav-link active" href="/admin/dashboard">
+            <a class="nav-link {{ request()->routeIs('admin.dashboard.page') ? 'active' : '' }}" href="/admin/dashboard">
                 <i class="bi bi-house-door me-3"></i> Dashboard
             </a>
 
-            <a class="nav-link" href="/admin/storefront">
+            <a class="nav-link {{ request()->routeIs('admin.storefront.page') ? 'active' : '' }}" href="/admin/storefront">
                 <i class="bi bi-shop me-3"></i> Storefront
             </a>
 
-            <a class="nav-link" href="/admin/inventory">
+            <a class="nav-link {{ request()->routeIs('admin.inventory.page') ? 'active' : '' }}" href="/admin/inventory">
                 <i class="bi bi-box-seam me-3"></i> Inventory
             </a>
 
-            <a class="nav-link" href="/admin/orders">
+            <a class="nav-link {{ request()->routeIs('admin.orders.page') ? 'active' : '' }}" href="/admin/orders">
                 <i class="bi bi-receipt-cutoff me-3"></i> Orders
             </a>
 
-            <a class="nav-link" href="/admin/reports">
+            <a class="nav-link {{ request()->routeIs('admin.reports.page') ? 'active' : '' }}" href="/admin/reports">
                 <i class="bi bi-bar-chart me-3"></i> Reports
             </a>
         </nav>
@@ -59,23 +59,23 @@
 
     <nav class="nav flex-column">
 
-        <a class="nav-link active" href="/admin/dashboard">
+        <a class="nav-link {{ request()->routeIs('admin.dashboard.page') ? 'active' : '' }}" href="{{ route('admin.dashboard.page') }}">
             <i class="bi bi-house-door me-3"></i> Dashboard
         </a>
 
-        <a class="nav-link" href="/admin/storefront">
+        <a class="nav-link {{ request()->routeIs('admin.storefront.page') ? 'active' : '' }}" href="{{ route('admin.storefront.page') }}">
             <i class="bi bi-shop me-3"></i> Storefront
         </a>
 
-        <a class="nav-link" href="/admin/inventory">
+        <a class="nav-link {{ request()->routeIs('admin.inventory.page') ? 'active' : '' }}" href="{{ route('admin.inventory.page') }}">
             <i class="bi bi-box-seam me-3"></i> Inventory
         </a>
 
-        <a class="nav-link" href="/admin/orders">
+        <a class="nav-link {{ request()->routeIs('admin.orders.page') ? 'active' : '' }}" href="{{ route('admin.orders.page') }}">
             <i class="bi bi-receipt-cutoff me-3"></i> Orders
         </a>
 
-        <a class="nav-link" href="/admin/reports">
+        <a class="nav-link {{ request()->routeIs('admin.reports.page') ? 'active' : '' }}" href="{{ route('admin.reports.page') }}">
             <i class="bi bi-bar-chart me-3"></i> Reports
         </a>
 

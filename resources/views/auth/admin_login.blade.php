@@ -18,7 +18,7 @@
 
         .login-image {
             background: linear-gradient(rgba(26, 48, 32, 0.7), rgba(26, 48, 32, 0.7)),
-                url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80');
+                url('https://images.unsplash.com/photo-1599148400620-8e1ff0bf28d8?auto=format&fit=crop&q=80');
             background-size: cover;
             background-position: center;
             min-height: 100vh;
@@ -92,11 +92,6 @@
                                 <input type="password" name="password" class="form-control bg-light border-start-0 py-2"
                                     placeholder="••••••••" required>
                             </div>
-                        </div>
-
-                        <div class="d-flex justify-content-end mb-4">
-                            <a href="#" class="small text-decoration-none fw-bold" style="color: #1a3020;">Reset
-                                Credentials?</a>
                         </div>
 
                         <button type="submit" class="btn btn-dark w-100 py-3 mb-4 shadow-sm"
