@@ -10,7 +10,9 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartCountsController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +32,10 @@ Route::get('/shop', [ShopController::class, 'ShopPage'])->name('shop.page');
 Route::get('/shop-search', [ShopController::class, 'ProductSearch']);
 
 Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/transactions', [TransactionController::class, 'MyTransactionPage'])->name('transactions.page');
+
     Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
     Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
@@ -37,8 +43,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart-count', [CartCountsController::class, 'count'])->name('cart.count');
 
     Route::get('/checkout', [CheckoutController::class, 'CheckoutPage'])->name('checkout.page');
-    Route::post('/checkout/place', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
-});
+    Route::post('/checkout/place', [CheckoutController::class, 'CheckoutRequest'])->name('checkout.request');
+Route::post('/checkout/profile/update', [CheckoutController::class, 'update'])
+    ->name('checkout.profile.update');
+    });
 
 
 Route::get('/login', [AuthController::class, 'LoginPage'])->name('auth.login.page');

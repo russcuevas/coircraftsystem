@@ -29,6 +29,7 @@
         .cart-items-container::-webkit-scrollbar-track {
             background: transparent;
         }
+        
     </style>
 </head>
 
@@ -110,7 +111,7 @@
                             <div class="d-flex justify-content-between fw-bold mb-3">
                                 <span>Total:</span>
                                 <span>
-                                    ₱{{ number_format($subtotal >= 1500 ? $subtotal : $subtotal + 150, 2) }}
+                                    ₱{{ number_format($subtotal, 2) }}
                                 </span>
                             </div>
                             <a href="{{ route('checkout.page') }}" class="btn btn-gold w-100">Proceed to Checkout</a>

@@ -4,7 +4,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white py-3 shadow-sm">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
+            <a class="navbar-brand d-flex align-items-center" href="/">
                 <i class="bi bi-leaf-fill text-success me-2"></i>
                 <div>
                     <span class="fw-bold d-flex align-items-center lh-1">
@@ -18,8 +18,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/shop">Shop</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('home.page') ? 'active' : '' }}"
+                            href="{{ route('home.page') }}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('shop.page') ? 'active' : '' }}"
+                            href="{{ route('shop.page') }}">
+                            Shop
+                        </a>
+                    </li>
                 </ul>
                 <div class="d-flex align-items-center gap-3">
 
@@ -54,13 +64,13 @@
 
                             @auth
                                 <li>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="/profile">
                                         <i class="bi bi-person me-2"></i> My Profile
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="/transactions">
                                         <i class="bi bi-receipt me-2"></i> My Transaction
                                     </a>
                                 </li>

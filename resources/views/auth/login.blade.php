@@ -100,7 +100,16 @@
                         <button type="submit" class="btn btn-gold w-100 py-3 mb-4">
                             Sign In <i class="bi bi-box-arrow-in-right ms-2"></i>
                         </button>
-
+                        <p class="text-center text-muted mb-0">
+                            Visit our homepage
+                            <a href="/" class="fw-bold text-decoration-none"
+                                style="color: var(--primary-green);">Home</a>
+                        </p>
+                        <p class="text-center text-muted mb-0">
+                            Dont have an account?
+                            <a href="/register" class="fw-bold text-decoration-none"
+                                style="color: var(--primary-green);">Register here</a>
+                        </p>
                     </form>
                 </div>
             </div>

@@ -250,50 +250,48 @@
         </div>
     </section>
 
-    <section class="py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <p class="text-uppercase fw-bold small mb-1" style="color: var(--accent-gold);">Browse by Use</p>
-                <h2 class="display-5 fw-bold">Shop by Category</h2>
-            </div>
-
-            <div class="row g-3 justify-content-center">
-                @php
-                    // Static image mapping based on category names
-                    $categoryImages = [
-                        'Gardening' =>
-                            'https://plus.unsplash.com/premium_photo-1678457828893-375d0572a589?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                        'Construction' =>
-                            'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80',
-                        'Home Decor' =>
-                            'https://media.istockphoto.com/id/491365816/photo/welcome-carpet.jpg?s=1024x1024&w=is&k=20&c=5LfN4xwhBM2Ax_hQtiGtvf82IEjnbuU7QX_IeM1wwWI=',
-                        'Agriculture' =>
-                            'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80',
-                    ];
-                    // Default image if category name doesn't match
-$defaultImage =
-    'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80';
-                @endphp
-
-                @foreach ($categories as $cat)
-                    <div class="col-6 col-md-4 col-lg">
-                        <a href="#{{ Str::slug($cat->category_name) }}" class="text-decoration-none">
-                            <div class="category-img-wrapper position-relative overflow-hidden rounded-3 shadow-sm">
-                                <img src="{{ $categoryImages[$cat->category_name] ?? $defaultImage }}"
-                                    alt="{{ $cat->category_name }}" class="img-fluid w-100"
-                                    style="height: 250px; object-fit: cover; transition: transform 0.5s;">
-
-                                <div class="category-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
-                                    style="background: rgba(0,0,0,0.3); transition: background 0.3s;">
-                                    <span class="fw-bold text-white fs-5">{{ $cat->category_name }}</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
+   <section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <p class="text-uppercase fw-bold small mb-1" style="color: var(--accent-gold);">Browse by Use</p>
+            <h2 class="display-5 fw-bold">Shop by Category</h2>
         </div>
-    </section>
+
+        <div class="row g-3 justify-content-center">
+            @php
+                // Static image mapping based on category names
+                $categoryImages = [
+                    'Gardening' =>
+                        'https://plus.unsplash.com/premium_photo-1678457828893-375d0572a589?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                    'Construction' =>
+                        'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80',
+                    'Home Decor' =>
+                        'https://media.istockphoto.com/id/491365816/photo/welcome-carpet.jpg?s=1024x1024&w=is&k=20&c=5LfN4xwhBM2Ax_hQtiGtvf82IEjnbuU7QX_IeM1wwWI=',
+                    'Agriculture' =>
+                        'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80',
+                ];
+                $defaultImage = 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&q=80';
+            @endphp
+
+            @foreach ($categories as $cat)
+                <div class="col-6 col-md-4 col-lg">
+                    <a href="{{ route('shop.page') }}?category={{ $cat->id }}" class="text-decoration-none">
+                        <div class="category-img-wrapper position-relative overflow-hidden rounded-3 shadow-sm">
+                            <img src="{{ $categoryImages[$cat->category_name] ?? $defaultImage }}"
+                                alt="{{ $cat->category_name }}" class="img-fluid w-100"
+                                style="height: 250px; object-fit: cover; transition: transform 0.5s;">
+
+                            <div class="category-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+                                style="background: rgba(0,0,0,0.3); transition: background 0.3s;">
+                                <span class="fw-bold text-white fs-5">{{ $cat->category_name }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
 
     @include('footer')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

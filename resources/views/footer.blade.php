@@ -19,8 +19,8 @@
             <div class="col-md-4 mb-4">
                 <h6 class="fw-bold">Quick Links</h6>
                 <ul class="list-unstyled small">
-                    <li><a href="#" class="text-white text-decoration-none">Home</a></li>
-                    <li><a href="#" class="text-white text-decoration-none">Shop</a></li>
+                    <li><a href="/" class="text-white text-decoration-none">Home</a></li>
+                    <li><a href="/shop" class="text-white text-decoration-none">Shop</a></li>
                 </ul>
             </div>
 

@@ -8,21 +8,22 @@ use Illuminate\Support\Facades\DB;
 class ShopController extends Controller
 {
     public function ShopPage(Request $request)
-    {
-        $categoryId = $request->category;
+{
+    $categoryId = $request->category;
 
-        $products = DB::table('products')
-            ->join('categories', 'products.category_id', '=', 'categories.id')
-            ->select('products.*', 'categories.category_name')
-            ->when($categoryId, function ($query, $categoryId) {
-                return $query->where('products.category_id', $categoryId);
-            })
-            ->get();
+    $products = DB::table('products')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->select('products.*', 'categories.category_name')
+        ->where('products.product_stocks', '>', 0) // Only available products
+        ->when($categoryId, function ($query, $categoryId) {
+            return $query->where('products.category_id', $categoryId);
+        })
+        ->get();
 
-        $categories = DB::table('categories')->get();
+    $categories = DB::table('categories')->get();
 
-        return view('shop', compact('products', 'categories', 'categoryId'));
-    }
+    return view('shop', compact('products', 'categories', 'categoryId'));
+}
 
     public function ProductSearch(Request $request)
     {
