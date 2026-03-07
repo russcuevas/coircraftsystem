@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <style>
         .register-container {
@@ -37,10 +38,41 @@
         .register-container {
             overflow-y: auto;
         }
+
+        /* Loading overlay */
+#loadingOverlay {
+    display: none; /* hide initially */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-green);
+    flex-direction: column;
+}
+
+        #loadingOverlay .spinner-border {
+            width: 3rem;
+            height: 3rem;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
 <body class="bg-light">
+
+    <div id="loadingOverlay">
+        <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        Registration processing... please wait
+    </div>
 
     <div class="container-fluid p-0">
         <div class="row g-0">
@@ -53,6 +85,7 @@
                 </div>
             </div>
 
+
             <div class="col-lg-7 bg-white register-container">
                 <div class="register-form-section w-100 mx-auto" style="max-width: 600px;">
                     <div class="text-center mb-4">
@@ -63,8 +96,8 @@
                         <p class="text-muted">Fill in your details to get started</p>
                     </div>
 
-                    <form action="/register" method="POST">
-                        <div class="row g-3">
+                    <form action="{{ route('auth.register.request') }}" method="POST">
+                        @csrf <div class="row g-3">
                             <div class="col-12">
                                 <label class="form-label fw-semibold">Complete Name</label>
                                 <div class="input-group">
@@ -144,6 +177,43 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script>
+        const notyf = new Notyf({
+            duration: 4000,
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            dismissible: true
+        });
+
+        @if (session('success'))
+            notyf.success("{{ session('success') }}");
+        @endif
+
+        @if (session('error'))
+            notyf.error("{{ session('error') }}");
+        @endif
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                notyf.error("{{ $error }}");
+            @endforeach
+        @endif
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.querySelector('form');
+        const overlay = document.getElementById('loadingOverlay');
+
+        if(form){
+            form.addEventListener('submit', function() {
+                overlay.style.display = 'flex';
+            });
+        }
+    });
+    </script>
 </body>
 
 </html>

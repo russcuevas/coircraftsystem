@@ -52,10 +52,9 @@ Route::post('/checkout/profile/update', [CheckoutController::class, 'update'])
 Route::get('/login', [AuthController::class, 'LoginPage'])->name('auth.login.page');
 Route::post('/login/request', [AuthController::class, 'LoginRequest'])->name('auth.login.request');
 Route::post('/logout', [AuthController::class, 'Logout'])->name('auth.logout');
-
 Route::get('/register', [AuthController::class, 'RegisterPage'])->name('auth.regsiter.page');
-
-
+Route::post('/register/request', [AuthController::class, 'RegisterRequest'])->name('auth.register.request');
+Route::get('/verify-email/{code}', [AuthController::class, 'VerifyEmail'])->name('auth.verify.email');
 // ADMIN
 Route::get('/admin/login', [AuthController::class, 'AdminLoginPage'])->name('auth.admin.login.page');
 

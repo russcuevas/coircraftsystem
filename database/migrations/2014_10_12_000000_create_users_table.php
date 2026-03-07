@@ -18,6 +18,11 @@ return new class extends Migration
             $table->string('fullname');
             $table->text('address')->nullable();
             $table->string('phone_number')->nullable();
+
+            // New fields for email verification
+            $table->boolean('is_email_verified')->default(0);
+            $table->string('verification_code')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });
